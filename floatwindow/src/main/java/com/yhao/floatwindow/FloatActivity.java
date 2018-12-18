@@ -59,29 +59,30 @@ public class FloatActivity extends Activity {
         }
         if (mPermissionListenerList == null) {
             mPermissionListenerList = new ArrayList<>();
-            mPermissionListener = new PermissionListener() {
-                @Override
-                public void onSuccess() {
-                    for (PermissionListener listener : mPermissionListenerList) {
-                        listener.onSuccess();
-                    }
-                    mPermissionListenerList.clear();
-                }
-
-                @Override
-                public void onFail() {
-                    for (PermissionListener listener : mPermissionListenerList) {
-                        listener.onFail();
-                    }
-                    mPermissionListenerList.clear();
-                }
-            };
-            Intent intent = new Intent(context, FloatActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
         }
+
+        mPermissionListener = new PermissionListener() {
+            @Override
+            public void onSuccess() {
+                for (PermissionListener listener : mPermissionListenerList) {
+                    listener.onSuccess();
+                }
+                mPermissionListenerList.clear();
+            }
+
+            @Override
+            public void onFail() {
+                for (PermissionListener listener : mPermissionListenerList) {
+                    listener.onFail();
+                }
+                mPermissionListenerList.clear();
+            }
+        };
+
         mPermissionListenerList.add(permissionListener);
+
+        Intent intent = new Intent(context, FloatActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
-
-
 }

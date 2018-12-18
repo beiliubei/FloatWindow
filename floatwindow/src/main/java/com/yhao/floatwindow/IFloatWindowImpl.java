@@ -58,6 +58,7 @@ public class IFloatWindowImpl extends IFloatWindow {
         mFloatLifecycle = new FloatLifecycle(mB.mApplicationContext, mB.mShow, mB.mActivities, new LifecycleListener() {
             @Override
             public void onShow() {
+                LogUtil.d("onShow");
                 show();
             }
 
@@ -80,19 +81,25 @@ public class IFloatWindowImpl extends IFloatWindow {
 
     @Override
     public void show() {
-        if (once) {
+        if (mFloatView.checkPermission()){
+            if (once) {
+                mFloatView.init();
+                once = false;
+                isShow = true;
+            } else {
+                if (isShow) {
+                    return;
+                }
+                getView().setVisibility(View.VISIBLE);
+                isShow = true;
+            }
+            if (mB.mViewStateListener != null) {
+                mB.mViewStateListener.onShow();
+            }
+        }else {
             mFloatView.init();
             once = false;
             isShow = true;
-        } else {
-            if (isShow) {
-                return;
-            }
-            getView().setVisibility(View.VISIBLE);
-            isShow = true;
-        }
-        if (mB.mViewStateListener != null) {
-            mB.mViewStateListener.onShow();
         }
     }
 

@@ -19,6 +19,8 @@ abstract class FloatView {
 
     abstract void dismiss();
 
+    abstract boolean checkPermission();
+
     void updateXY(int x, int y) {
     }
 

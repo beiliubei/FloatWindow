@@ -66,6 +66,11 @@ class FloatToast extends FloatView {
         }
     }
 
+    @Override
+    boolean checkPermission() {
+        return true;
+    }
+
 
     private void initTN() {
         try {

@@ -122,6 +122,11 @@ class FloatPhone extends FloatView {
     }
 
     @Override
+    boolean checkPermission() {
+        return PermissionUtil.hasPermission(mContext);
+    }
+
+    @Override
     public void updateXY(int x, int y) {
         if (isRemove) return;
         mLayoutParams.x = mX = x;
